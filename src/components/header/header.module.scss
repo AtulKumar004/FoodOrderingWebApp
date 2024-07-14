@@ -1,0 +1,43 @@
+.headerCont {
+  /* Rectangle 396 */
+  padding: 1.5rem 2rem;
+  background-color: red;
+  // position: absolute;
+  //   width: 100%;
+  margin: auto;
+  //   border: 1px solid red;
+  /* Rectangle 396 */
+
+  background: linear-gradient(
+    126.52deg,
+    #4b773b 40.84%,
+    rgba(58, 111, 40, 0.88) 48.83%,
+    rgba(74, 149, 47, 0.76) 64.46%,
+    #4a952f 73.46%
+  );
+
+  .navRoutes {
+    padding: 0 1rem;
+
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20.621px;
+    line-height: 25px;
+
+    color: #f0feee;
+  }
+  .loginBtn,
+  .registerBtn {
+  
+    padding: 0.5rem 1.8rem;
+    border-radius: 10px;
+    color: #fff;
+  }
+  .registerBtn {
+    background-color: #2BEA0C;
+  }
+  .loginBtn {
+    background-color: #E8AD17
+    ;
+  }
+}

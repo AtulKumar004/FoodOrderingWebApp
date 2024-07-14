@@ -16,8 +16,16 @@
   }
 }
 
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
+  width: 100vw;
+  height: 100vh;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -29,5 +37,11 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 80vw;
   }
 }
