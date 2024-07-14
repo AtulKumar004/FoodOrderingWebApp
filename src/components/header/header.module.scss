@@ -41,3 +41,35 @@
     ;
   }
 }
+
+
+.heroCont {
+//   border: 1px solid red;
+  min-height: 500px;
+
+
+  height: 751px;
+
+//   background: url(241-2413745_transparent-background-grocery-bag-png-png-download.png);
+background: url('/vegitableBag.png'), 
+linear-gradient(
+    126.52deg,
+    #4b773b 40.84%,
+    rgba(58, 111, 40, 0.88) 48.83%,
+    rgba(74, 149, 47, 0.76) 64.46%,
+    #4a952f 73.46%
+  );
+  
+;
+
+background-size: contain; /* Make the image cover the whole area */
+  
+  /* Background position */
+  background-position: right; /* Center the image */
+
+  /* Background repeat */
+  background-repeat: no-repeat; /* Don't repeat the image */
+
+  /* Ensure the background gradient covers the entire element */
+  background-blend-mode: multiply;
+}

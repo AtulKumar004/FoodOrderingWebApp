@@ -6,6 +6,8 @@ import Link from "next/link";
 
 export default function Header() {
   return (
+    <div>
+
     <div
       className={classNames({
         [styles.headerCont]: true,
@@ -65,13 +67,13 @@ export default function Header() {
               9
             </span>
           </Link>
-       
-         
+
+
         </div>
 
         <div className="flex items-center gap-12 flex-1  justify-end">
 
-        <Link
+          <Link
             className={classNames({
               [styles.navRoutes]: true,
               [styles.loginBtn]: true,
@@ -91,6 +93,9 @@ export default function Header() {
           </Link>
         </div>
       </nav>
+      
+    </div>
+ 
     </div>
   );
 }
