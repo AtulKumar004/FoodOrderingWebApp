@@ -16,7 +16,10 @@ export default function RootLayout({ children }) {
       <body className={inter.className} style={{ margin: "auto" }}>
         <Header />
         <Hero />
+        <div className="mx-auto  ">
+          
         {children}
+        </div>
         </body>
     </html>
   );

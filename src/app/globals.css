@@ -26,14 +26,28 @@ body {
   color: rgb(var(--foreground-rgb));
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+    overflow-x: hidden;
 }
+.deliveryService{
+  background-image: url('/bg.svg');
+  background-size: 90%; /* Make the image cover the whole area */
+  padding: 2rem;
+  /* Background position */
+  background-position: left; /* Center the image */
 
+  /* Background repeat */
+  background-repeat: no-repeat; /* Don't repeat the image */
+
+  /* Ensure the background gradient covers the entire element */
+  background-blend-mode: multiply;
+
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
