@@ -1,9 +1,13 @@
 import ServiceCard from "@/components/Cards/serviceCard";
+import Header from "@/components/header/header";
+import Hero from "@/components/Hero/hero";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <>
+    <Header />
+    <Hero />
       <main className="container mx-auto">
         <div className="grid grid-cols-4 gap-4 min-h-[900px] h-[100vh]  mt-10">
 
@@ -25,7 +29,7 @@ export default function Home() {
   );
 }
 
-/* Why We Are The Best? */
+
 
 
 
