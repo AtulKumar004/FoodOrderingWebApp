@@ -1,8 +1,7 @@
-import NextAuth from "next-auth";
-import options from "./option";
-import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
-const handler = NextAuth({
+import CredentialsProvider from "next-auth/providers/credentials";
+
+const options = {
   secret: process.env.SECRET,
   providers: [
     CredentialsProvider({
@@ -21,10 +20,7 @@ const handler = NextAuth({
           email: credentials.email,
           password: credentials.password,
         };
-        // return null;
-
-       
-
+  
         // const res = await fetch("/api/login", {
         //   method: "POST",
         //   body: JSON.stringify(requestBody),
@@ -32,19 +28,18 @@ const handler = NextAuth({
         // });
 
         axios
-          .post("/api/login", requestBody)
+          .post("http://localhost:3000/api/login", requestBody)
           .then((res) => {
-            // return Response.json(res);
             console.log("Login Res ====>", res);
-            return true ;
+          
           })
           .catch((err) => console.log("Error ===>", err));
-        return true;
+        // return null;
 
         // Return null if user data could not be retrieved
       },
     }),
   ],
-});
+};
 
-export { handler as GET, handler as POST };
+module.exports = options;

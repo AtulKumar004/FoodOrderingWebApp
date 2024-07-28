@@ -1,7 +1,8 @@
-import ServiceCard from "@/components/Cards/serviceCard";
-import Header from "@/components/header/header";
-import Hero from "@/components/Hero/hero";
+
+import Header from "../components/header/header";
+import Hero from "../components/Hero/hero";
 import Image from "next/image";
+import ServiceCard from "../components/Cards/serviceCard"
 
 export default function Home() {
   return (
