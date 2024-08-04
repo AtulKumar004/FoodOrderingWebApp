@@ -2,6 +2,8 @@ import { Inter, Lato } from "next/font/google";
 import "../globals.css";
 import AuthProvider from "../context/authrovider";
 import Header from "../../components/header/header";
+import NavbarTabs from "../../components/NavbarTabs/navbarTabs";
+import TabComp from "./tabComp"
 
 const inter = Lato({
   subsets: ["latin"],
@@ -15,15 +17,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className} style={{ margin: "auto" }}>
-        <AuthProvider>
-          <div className="mx-auto  ">
-            <Header />
-            {children}
-          </div>
-        </AuthProvider>
-      </body>
-    </html>
+    // <html lang="en">
+    //   <body className={inter.className} style={{ margin: "auto" }}>
+    <AuthProvider>
+      <div className="mx-auto  ">
+        <Header />
+
+        <div className="container mx-auto">
+          {/* <NavbarTabs /> */}
+          <TabComp />
+          {children}
+        </div>
+      </div>
+    </AuthProvider>
   );
 }

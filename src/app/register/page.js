@@ -93,7 +93,7 @@ const Register = () => {
       console.log("Form submitted:", formData);
       axios.post("/api/register",  formData).then((res) => {
           console.log(res);
-      }).catch((err) => console.log("Error ===>" , err))
+      }).catch((err) => console.log("Error ===> 3" , err))
     }
 
   };

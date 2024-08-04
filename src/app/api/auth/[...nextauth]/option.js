@@ -33,7 +33,7 @@ const options = {
             console.log("Login Res ====>", res);
           
           })
-          .catch((err) => console.log("Error ===>", err));
+          .catch((err) => console.log("Error ===> 1", err));
         // return null;
 
         // Return null if user data could not be retrieved

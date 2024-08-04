@@ -25,23 +25,24 @@ const handler = NextAuth({
 
        
 
-        // const res = await fetch("/api/login", {
-        //   method: "POST",
-        //   body: JSON.stringify(requestBody),
-        //   headers: { "Content-Type": "application/json" },
-        // });
+       
+
+        console.log('requestBody  ====>' ,requestBody)
 
         axios
-          .post("/api/login", requestBody)
+          .post("http://localhost:3000/api/login", requestBody)
           .then((res) => {
             // return Response.json(res);
-            console.log("Login Res ====>", res);
+            console.log("Login Res hgjhg ====>", res);
             return true ;
           })
-          .catch((err) => console.log("Error ===>", err));
-        return true;
+          .catch((err)  => {
+            console.log("Login Err 5 ====>", err);
+            return false;
+          });
+          
 
-        // Return null if user data could not be retrieved
+
       },
     }),
   ],

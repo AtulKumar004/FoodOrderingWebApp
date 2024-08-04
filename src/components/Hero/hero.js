@@ -8,7 +8,7 @@ export default function Hero() {
 
             <div className='container  flex  mx-auto h-full'>
                 <div className={styles.heroLeft} >
-                    <p >
+                    <p>
                         Buy your groceries and have it delivered
                         to your doorstep with ease.
                     </p>

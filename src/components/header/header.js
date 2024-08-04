@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./header.module.scss";
 import Image from "next/image";
 import classNames from "classnames";
@@ -7,17 +7,41 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 
 export default function Header() {
+ 
   const session = useSession();
-  const { status } = session;
-  console.log("session ===>", session);
+
+  console.log("session ====>" , session)
+  const [sessionStatus , setSessionStatus] = useState('')
+  const [loading , setLoading] = useState(false)
+
+  const handleSession = () =>{
+    const {status} = session;
+    console.log("Session ====> status", status)
+    console.log("Session ====> ", session)
+    if(status){
+      setSessionStatus(status)
+    }
+    setLoading(true)
+
+  }
+  useEffect(() => {
+    handleSession();
+  }, [session]) ;
+
+
+
+  
+  
+
   return (
     <div>
-      <div
+      {
+        loading ?       <div
         className={classNames({
           [styles.headerCont]: true,
         })}
       >
-        <nav className="flex items-center container m-auto gap-8 ">
+        <div className="flex items-center container m-auto gap-8 ">
           <div className="flex gap-12">
             <Image
               src="brandLogo.svg"
@@ -79,7 +103,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-12 flex-1  justify-end">
-            {status === "authenticated" && (
+            {sessionStatus === "authenticated" && (
               <button
                 className={classNames({
                   [styles.navRoutes]: true,
@@ -91,7 +115,7 @@ export default function Header() {
               </button>
             )}
             {
-              status !== "authenticated"  &&
+              sessionStatus !== "authenticated"  &&
               <>
               <Link
               className={classNames({
@@ -115,8 +139,11 @@ export default function Header() {
             }
           
           </div>
-        </nav>
-      </div>
+        </div>
+      </div>: ""
+      }
+
+
     </div>
   );
 }

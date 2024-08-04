@@ -1,9 +1,10 @@
 import { Inter, Lato } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./context/authrovider";
+import { NextUIProvider } from "@nextui-org/react";
 
 
-const inter = Lato({ subsets: ["latin"] , weight: ['100', '300', '400', '700', ]});
+const inter = Lato({ subsets: ["latin"], weight: ['100', '300', '400', '700',] });
 
 export const metadata = {
   title: "Create Next App",
@@ -14,12 +15,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className} style={{ margin: "auto" }}>
-     
+
         <div className="mx-auto  ">
-          
-        <AuthProvider>{children}</AuthProvider>
+
+          <AuthProvider>
+            <NextUIProvider >
+              {children}
+            </NextUIProvider>
+          </AuthProvider>
         </div>
-        </body>
+      </body>
     </html>
   );
 }
