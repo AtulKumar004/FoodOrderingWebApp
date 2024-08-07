@@ -4,29 +4,29 @@ import styles from "./header.module.scss";
 import Image from "next/image";
 import classNames from "classnames";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+// import { signOut, useSession } from "next-auth/react";
 
 export default function Header() {
  
-  const session = useSession();
+  // const session = useSession();
 
-  console.log("session ====>" , session)
+  // console.log("session ====>" , session)
   const [sessionStatus , setSessionStatus] = useState('')
   const [loading , setLoading] = useState(false)
 
-  const handleSession = () =>{
-    const {status} = session;
-    console.log("Session ====> status", status)
-    console.log("Session ====> ", session)
-    if(status){
-      setSessionStatus(status)
-    }
-    setLoading(true)
+  // const handleSession = () =>{
+  //   const {status} = session;
+  //   console.log("Session ====> status", status)
+  //   console.log("Session ====> ", session)
+  //   if(status){
+  //     setSessionStatus(status)
+  //   }
+  //   setLoading(true)
 
-  }
-  useEffect(() => {
-    handleSession();
-  }, [session]) ;
+  // }
+  // useEffect(() => {
+  //   handleSession();
+  // }, [session]) ;
 
 
 
@@ -36,7 +36,7 @@ export default function Header() {
   return (
     <div>
       {
-        loading ?       <div
+        true ?       <div
         className={classNames({
           [styles.headerCont]: true,
         })}

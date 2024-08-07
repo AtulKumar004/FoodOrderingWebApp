@@ -1,5 +1,9 @@
 const { Schema, models, model } = require("mongoose");
+
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+// import { MongodbAdapter } from "@lucia-auth/adapter-mongodb";
+import { type } from "os";
 const saltRounds = 10;
 
 const UserSchema = new Schema(
@@ -45,3 +49,4 @@ UserSchema.post("validate", function (user) {
 });
 
 export const User = models?.User || model("User", UserSchema);
+

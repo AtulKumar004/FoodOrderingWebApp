@@ -1,51 +1,65 @@
-import NextAuth from "next-auth";
-import options from "./option";
-import CredentialsProvider from "next-auth/providers/credentials";
+// import NextAuth from "next-auth";
+
+const { cookies } = require('next/headers');
+// import { cookies } from 'next/headers';
+
+// const { cache } = require('react');
+import  { cache } from 'react';
+import dbConnect from '../../../../db/config/dbConnect';
+
+// import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
-const handler = NextAuth({
-  secret: process.env.SECRET,
-  providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      id: "credentials",
-      credentials: {
-        username: { label: "Email", type: "email", placeholder: "nsjskjjkas" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        // This is where you need to retrieve user data
-        // to verify with credentials
-        // Docs: https://next-auth.js.org/configuration/providers/credentials
+import { Lucia } from "lucia";
+import { adapter } from "../../models/session";
 
-        const requestBody = {
-          email: credentials.email,
-          password: credentials.password,
-        };
-        // return null;
+dbConnect();
 
-       
+export  const lucia = new Lucia(adapter, {
+  sessionCookie: {
+    attributes: {
+      secure: process.env.NODE_ENV === 'production'
+    },
 
-       
+  },
+  getUserAttributes: (attribute) => {
+    return {
+      username: attribute?.fullName ?? "Not valied"
+    }
 
-        console.log('requestBody  ====>' ,requestBody)
-
-        axios
-          .post("http://localhost:3000/api/login", requestBody)
-          .then((res) => {
-            // return Response.json(res);
-            console.log("Login Res hgjhg ====>", res);
-            return true ;
-          })
-          .catch((err)  => {
-            console.log("Login Err 5 ====>", err);
-            return false;
-          });
-          
-
-
-      },
-    }),
-  ],
+  }
 });
 
-export { handler as GET, handler as POST };
+export  const validateRequest = cache(
+  async () => {
+    const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
+    if (!sessionId) {
+      return {
+        user: null,
+        session: null,
+      };
+    }
+    const result = await lucia.validateSession(sessionId);
+    try {
+
+      if (result?.session && result?.session.fresh) {
+        const sessionCookie = lucia.createSessionCookie(result?.session.id);
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes
+
+        );
+      }
+
+    } catch (error) {
+      console.error("auth error => ", error);
+    }
+
+    return result;
+  }
+);
+// model.exports = {
+//   lucia,
+//   validateRequest,
+// }
+

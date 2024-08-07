@@ -1,6 +1,6 @@
 import { Inter, Lato } from "next/font/google";
 import "./globals.css";
-import AuthProvider from "./context/authrovider";
+
 import { NextUIProvider } from "@nextui-org/react";
 
 
@@ -18,11 +18,11 @@ export default function RootLayout({ children }) {
 
         <div className="mx-auto  ">
 
-          <AuthProvider>
+          {/* <AuthProvider> */}
             <NextUIProvider >
               {children}
             </NextUIProvider>
-          </AuthProvider>
+          {/* </AuthProvider> */}
         </div>
       </body>
     </html>

@@ -4,10 +4,13 @@ import dbConnect from '../../../db/config/dbConnect';
 
 import bcrypt from 'bcrypt';
 import { User } from "../models/user";
-dbConnect();
+import { lucia  ,validateRequest } from "../auth/[...nextauth]/route"
+import { cookies } from 'next/headers';
+
 
 
 export async function GET(request) {
+    
     console.log("Login API ")
     const users = await User.find({}).sort({ _id: -1 });
 
@@ -20,8 +23,9 @@ export async function GET(request) {
 
 export async function POST(request) {
 
+    await dbConnect();
     const { email, password } = await request.json();
-    console.log("Login Post API ===>" ,email , "password: " , password)
+    console.log("Login Post API ===>", email, "password: ", password)
     // Check if email and password are provided
     if (!email || !password) {
         return new Response(JSON.stringify({
@@ -44,22 +48,17 @@ export async function POST(request) {
         }));
     }
 
-    // if(password == user.password) {
-    //     return new Response(JSON.stringify({
-    //         success: true,
-    //         status: 200,
-    //         data: user
-    //     }));
-    // }else{
-    //       return new Response(JSON.stringify({
-    //         success: false,
-    //         status: 400,
-    //         message: 'Wrong Password'
-    //     }));
-    // }
+
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (isPasswordValid) {
+        const session = await lucia.createSession(user._id, {});
+        const sessionCookie = lucia.createSessionCookie(session.id);
+        cookies().set(
+            sessionCookie.name,
+            sessionCookie.value,
+            sessionCookie.attributes
+        );
         return new Response(JSON.stringify({
             success: true,
             status: 200,
@@ -72,5 +71,6 @@ export async function POST(request) {
             message: 'Wrong Password'
         }));
     }
+   
 
 }

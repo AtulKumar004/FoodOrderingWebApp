@@ -1,6 +1,6 @@
 import { Inter, Lato } from "next/font/google";
 import "../globals.css";
-import AuthProvider from "../context/authrovider";
+// import AuthProvider from "../context/authrovider";
 import Header from "../../components/header/header";
 import NavbarTabs from "../../components/NavbarTabs/navbarTabs";
 import TabComp from "./tabComp"
@@ -17,9 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    // <html lang="en">
-    //   <body className={inter.className} style={{ margin: "auto" }}>
-    <AuthProvider>
+    
       <div className="mx-auto  ">
         <Header />
 
@@ -29,6 +27,6 @@ export default function RootLayout({ children }) {
           {children}
         </div>
       </div>
-    </AuthProvider>
+
   );
 }

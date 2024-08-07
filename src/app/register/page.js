@@ -169,37 +169,7 @@ const Register = () => {
               )}
             </div>
 
-            <div className="mb-4 flex items-center">
-              <select
-                name="countryCode"
-                value={formData.countryCode}
-                onChange={(e) => handleChange("countryCode", e.target.value)}
-                className="p-2 rounded-lg w-2/4 border"
-              >
-                {countryCodes.map((country) => (
-                  <option key={country.code} value={country.code}>
-                    <Flag code={country.flag} />
-                    {`${country.code} (${country.name})`}
-                  </option>
-                ))}
-              </select>
-
-              <input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={(e) => handleChange("phoneNumber", e.target.value)}
-                className={`w-3/4 border p-2 rounded-lg ${
-                  errors.phoneNumber ? "border-red-400" : ""
-                } ml-2`}
-                placeholder="Phone Number"
-              />
-              {errors.phoneNumber && (
-                <p className="text-red-400 text-xs mt-1">
-                  {errors.phoneNumber}
-                </p>
-              )}
-            </div>
+       
 
             <div className="mb-4">
               <label

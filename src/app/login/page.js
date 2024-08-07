@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useRouter } from 'next/navigation'
+import axios from "axios";
+import { validateRequest } from "../api/auth/[...nextauth]/route"
 
 const Login = () => {
   const router = useRouter()
@@ -15,7 +17,13 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [sessionValue, setSession] = useState();
+  const handleSession = async (e) => {
+    const { session } = await validateRequest();
+    await setSession(session);
+    console.log("session =======>" ,session)
 
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -63,27 +71,23 @@ const Login = () => {
 
     if (true) {
       console.log("Form submitted:", formData);
-      const res_data = await signIn("credentials", {
-        email: formData.email,
-        password: formData.password,
-        redirect: false,
-      });
-      console.log("res_data   ===>", res_data);
-      if (
-        res_data.status === 400 ||
-        res_data.status === 401 ||
-        res_data.status === 403
-      ) {
-        console.log("Invalid Credentials!");
-        alert("Invalid Credentials dfdfdfdf!");
-      } else if (res_data.status === 500) {
-        console.log("Server error!");
-        alert("Server error!");
-      } else {
-        router.push('/')
-      }
+      // const res_data = await signIn("credentials", {
+      //   email: formData.email,
+      //   password: formData.password,
+      //   redirect: false,
+      // });++
+
+      axios.post("/api/login", formData).then((res) => {
+        console.log(res.data);
+      }).catch(err => console.log("Login Error =>", err))
+
+
     }
   };
+
+  useEffect(() => {
+    handleSession()
+  },[])
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -123,9 +127,8 @@ const Login = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full border p-2 rounded-lg h-12 ${
-                  errors.email ? "border-red-400" : ""
-                }`}
+                className={`w-full border p-2 rounded-lg h-12 ${errors.email ? "border-red-400" : ""
+                  }`}
               />
               {errors.email && (
                 <p className="text-red-400 text-xs mt-1">{errors.email}</p>
@@ -145,9 +148,8 @@ const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`w-full border p-2 rounded-lg h-12 ${
-                  errors.password ? "border-red-400" : ""
-                }`}
+                className={`w-full border p-2 rounded-lg h-12 ${errors.password ? "border-red-400" : ""
+                  }`}
               />
               {errors.password && (
                 <p className="text-red-400 text-xs mt-1">{errors.password}</p>
